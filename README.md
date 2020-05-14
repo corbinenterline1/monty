@@ -1,3 +1,6 @@
+ # STATUS
+Currently I've got it all malloc and freeing properly. The push and pall functions merely print a line, but everything is testing properly. Next step is implementing opcodes themselves. 
+ ## Might need to separate tok and strncmps to their own function
  # Monty bytecode Interpreter
  ## 0x19. C - Stacks, Queues - LIFO, FIFO
 

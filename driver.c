@@ -1,35 +1,37 @@
 #include "monty.h"
-
+int gbn;
 /**
  * main - Main function for monty program.
  * Takes in one argument, which is a filepath to a monty file
- * 
- *
+ * @argc: argument count
+ * @argv: array of argument string
+ * Return: EXIT_SUCCESS or EXIT_FAILURE
  */
 int main(int argc, char *argv[])
 {
-	int lc = 0;/* line counter */
-	char *str = NULL;/* Line read by getline from file, used in loop */
-	size_t len = 0;/* len of line from getline */
-	ssize_t read;
-	FILE *fp;/* file pointer for return from fopen */
+	unsigned int lc = 0;
+	char *str = NULL, *tok = NULL, *sp = " ", *ff = argv[1];
+	size_t len = 0;
+	ssize_t reader;
+	FILE *fp;
+	stack_t *stack;
 
 	if (argc != 2)/* If argument count is wrong */
-	{
-		write(STDERR_FILENO, "USAGE: monty file\n", 18);
-		exit(EXIT_FAILURE);
-	}
-	fp = fopen(argv[1], "r");
+		wrongargc();
+	fp = fopen(ff, "r");
 	if (fp == NULL)/* If file failed to open */
+		filefail(ff);
+	while ((reader = getline(&str, &len, fp)) != -1)
 	{
-		write(STDERR_FILENO, "Error: Can't open file ", 23);
-		write(STDERR_FILENO, argv[1], _strlen(argv[1]));
-		write(STDERR_FILENO, "\n", 1);
-		exit(EXIT_FAILURE);
-	}
-	while ((read = getline(&str, &len, fp)) != -1)
-	{
-		write(STDOUT_FILENO, str, _strlen(str));
+		tok = strtok(str, sp);
+		if (strncmp(tok, "push", 4) == 0)
+		{
+			tok = strtok(NULL, sp);
+			gbn = atoi(tok);
+			push(&stack, lc);
+		}
+		else if (strncmp(tok, "pall", 4) == 0)
+			printf("Pall here!\n");
 		free(str);
 		str = NULL;
 		lc++;

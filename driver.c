@@ -10,12 +10,11 @@ int gbn;
 int main(int argc, char *argv[])
 {
 	unsigned int lc = 0;
-	char *str = NULL, *tok = NULL, *sp = " \n", *ff = argv[1];
+	char *str = NULL, *tok = NULL, *sp = " ", *ff = argv[1];
 	size_t len = 0;
 	ssize_t reader;
 	FILE *fp;
 	stack_t *stack;
-	int j = 0;
 
 	if (argc != 2)/* If argument count is wrong */
 		wrongargc();
@@ -31,22 +30,8 @@ int main(int argc, char *argv[])
 			gbn = atoi(tok);
 			push(&stack, lc);
 		}
-/**
- *		else if (strncmp(tok, "pall", 4) == 0)
- *			pall(&stack, lc);
- */
-		else
-		{
-			instruction_t ops[] = {
-				{"push", push},
-				{"pall", pall},
-				{NULL, NULL}
-			};
-
-			for (j = 0; ops[j].opcode; j++)
-				if (ops[j].opcode == tok)
-					ops[j].f(&stack, lc);
-		}
+		else if (strncmp(tok, "pall", 4) == 0)
+			printf("Pall here!\n");
 		free(str);
 		str = NULL;
 		lc++;

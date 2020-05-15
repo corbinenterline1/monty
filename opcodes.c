@@ -10,7 +10,7 @@ void push(stack_t **stack, unsigned int line_number)
 
 	if (gbn == -1)
 	{
-		fprintf(stderr,"L%d: usage: push integer\n", line_number); 
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		gbn = -1;
 		return;
 	}
@@ -27,7 +27,6 @@ void push(stack_t **stack, unsigned int line_number)
 	if (*stack != NULL)
 		(*stack)->prev = new;
 	*stack = new;
-	return;
 }
 
 /**
@@ -50,12 +49,14 @@ void pall(stack_t **stack, unsigned int line_number)
 }
 
 /**
- *
- *
+ * pint - prints top of stack
+ * @stack: stack
+ * @line_number: line number
  */
 void pint(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp = *stack;
+
 	if (!tmp->next)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);

@@ -1,7 +1,10 @@
+ # STATUS
+Currently I've got it all malloc and freeing properly. The push and pall functions merely print a line, but everything is testing properly. Next step is implementing opcodes themselves. 
+ ## Might need to separate tok and strncmps to their own function
  # Monty bytecode Interpreter
  ## 0x19. C - Stacks, Queues - LIFO, FIFO
 
-This is a Monty bytecode Interpreter created by Corbin Enterline for Holberton School, Trimester 1.
+This is a Monty bytecode Interpreter created by Anthony Sims & Corbin Enterline for Holberton School, Trimester 1.
 This program interprets and runs Monty byte code.  Usage as follows:
 
 * Usage

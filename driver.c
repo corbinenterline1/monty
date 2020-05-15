@@ -9,7 +9,7 @@ int gbn;
  */
 int main(int argc, char *argv[])
 {
-	unsigned int lc = 1;
+	unsigned int lc = 0;
 	char *str = NULL, *tok = NULL, *sp = " ", *ff = argv[1];
 	size_t len = 0;
 	ssize_t reader;
@@ -27,25 +27,17 @@ int main(int argc, char *argv[])
 		if (strncmp(tok, "push", 4) == 0)
 		{
 			tok = strtok(NULL, sp);
-			if (tok == NULL)
-				gbn = -1;
-			else
-				gbn = atoi(tok);
+			gbn = atoi(tok);
 			push(&stack, lc);
 		}
 		else if (strncmp(tok, "pall", 4) == 0)
-			pall(&stack, lc);
-		else if (strncmp(tok, "pint", 4) == 0)
-			pint(&stack, lc);
+			printf("Pall here!\n");
 		free(str);
 		str = NULL;
 		lc++;
-		if (gbn == -1)
-			break;
 	}
+	printf("Line count: %d\n", lc);
 	fclose(fp);
 	free(str);
-	if (gbn == -1)
-		exit(EXIT_FAILURE);
 	exit(EXIT_SUCCESS);
 }

@@ -1,5 +1,5 @@
 #include "monty.h"
-int gbn;
+int gbn = 0;
 /**
  * main - Main function for monty program.
  * Takes in one argument, which is a filepath to a monty file
@@ -9,7 +9,7 @@ int gbn;
  */
 int main(int argc, char *argv[])
 {
-	unsigned int lc = 0;
+	unsigned int lc = 1;
 	char *str = NULL, *tok = NULL, *sp = " ", *ff = argv[1];
 	size_t len = 0;
 	ssize_t reader;
@@ -27,17 +27,50 @@ int main(int argc, char *argv[])
 		if (strncmp(tok, "push", 4) == 0)
 		{
 			tok = strtok(NULL, sp);
-			gbn = atoi(tok);
+			if (tok == NULL)
+				gbn = -1;
+			else
+				gbn = atoi(tok);
 			push(&stack, lc);
 		}
 		else if (strncmp(tok, "pall", 4) == 0)
-			printf("Pall here!\n");
+			pall(&stack, lc);
+		else if (strncmp(tok, "pint", 4) == 0)
+			pint(&stack, lc);
+		else
+			badinst(lc, tok);
 		free(str);
 		str = NULL;
 		lc++;
+		if (gbn == -1)
+			break;
 	}
-	printf("Line count: %d\n", lc);
+	freeandclose(&stack, fp, str);
+	if (gbn == -1)
+		exit(EXIT_FAILURE);
+	exit(EXIT_SUCCESS);
+}
+
+/**
+ * freeandclose - frees it all and closes program
+ * @head: double pointer to head
+ * @fp: file being read
+ * @str: string from getline
+ */
+void freeandclose(stack_t **head, FILE *fp, char *str)
+{
+	stack_t *new;
+
+	while ((*head)->next)
+	{
+		new = (*head);
+		(*head) = (*head)->next;
+		free(new);
+	}
 	fclose(fp);
 	free(str);
-	exit(EXIT_SUCCESS);
+	if (gbn == -1)
+		exit(EXIT_FAILURE);
+	else
+		exit(EXIT_SUCCESS);
 }

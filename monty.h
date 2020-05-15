@@ -1,7 +1,7 @@
 #ifndef MONTY_H
 #define MONTY_H
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 #include <stdio.h>
 #include <unistd.h>
 /**
@@ -37,7 +37,9 @@ typedef struct instruction_s
 extern int gbn;
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
 void filefail(char *ff);
 void wrongargc(void);
-
+void badinst(unsigned int lc, char *tok);
+void freeandclose(stack_t **head, FILE *fp, char *str);
 #endif

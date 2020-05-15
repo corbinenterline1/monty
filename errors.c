@@ -20,3 +20,15 @@ void wrongargc(void)
 	write(STDERR_FILENO, "USAGE: monty file\n", 18);
 	exit(EXIT_FAILURE);
 }
+
+/**
+ * badinst - bad instruction error
+ * @lc: line count
+ * @tok: attempted opcode
+ */
+void badinst(unsigned int lc, char *tok)
+{
+	fprintf(stderr, "L%d: unknown instruction %s\n", lc, tok);
+	gbn = -1;
+
+}
